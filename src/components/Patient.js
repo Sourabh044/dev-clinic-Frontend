@@ -9,7 +9,7 @@ const Patient = () => {
 },[])
 
   return (
-    <div>
+    <div className='animate__slideInUp'>
       <h5 className='lead text-left'>Listing all Patients.</h5>
       <table className="table table-hover table-light container">
   <thead className='table-dark'>

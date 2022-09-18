@@ -1,6 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import Ssvg from './images/signupform.svg'
 const Signupform = () => {
+  const [credentials, setCredentials] = useState({semail:'', spassword: '', smobile:''})
+
+  const onChange = (e) =>{
+    setCredentials({...credentials, [e.target.name]: e.target.value})
+  };
+
+  const handleSignup = async (event) =>{
+    event.preventDefault();
+    
+  }
+
+
+  
   return (
     <div className="d-flex flex-column flex-lg-row justify-content-between">
       <img
@@ -9,43 +22,52 @@ const Signupform = () => {
         alt="Login illustraition here!"
       />
           <div className="border"></div>
-      <form className="container text-start col">
+      <form onSubmit={handleSignup} className="container text-start col">
         <div className=" mb-3">
-          <label for="email" className="form-label">
+          <label htmlFor="semail" className="form-label">
             Email address
           </label>
           <input
             type="email"
             className="form-control"
-            id="email"
+            id="semail"
             aria-describedby="emailHelp"
+            onChange={onChange}
+            name='semail'
+            value={credentials.semail}
           />
           <div id="emailHelp" className="form-text">
             We'll never share your Email with anyone else.
           </div>
         </div>
         <div className=" mb-3">
-          <label for="mobile" className="form-label">
+          <label htmlFor="smobile" className="form-label">
             Mobile Number
           </label>
           <input
             type="number"
             className="form-control"
-            id="mobile"
+            id="smobile"
             aria-describedby="emailHelp"
+            onChange={onChange}
+            name='smobile'
+            value={credentials.smobile}
           />
           <div id="emailHelp" className="form-text">
             We'll never share your Phone with anyone else.
           </div>
         </div>
         <div className="mb-3">
-          <label for="password" className="form-label">
+          <label htmlFor="spassword" className="form-label">
             Password
           </label>
           <input
-            type="password"
+          name="spassword"
+            type="spassword"
+            onChange={onChange}
             className="form-control"
-            id="password"
+            id="spassword"
+            value={credentials.spassword}
           />
         </div>
         <div className="d-grid gap-2 d-md-flex justify-content-md-end">

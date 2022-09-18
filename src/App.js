@@ -7,8 +7,10 @@ import Appointments from './components/Appointments';
 import About from './components/About';
 import PatientState from './context/Patients/patientState';
 import AppointmentState from './context/Appointments/appointmentState';
+import UserState from './context/User/userState';
 function App() {
   return (
+    <UserState>
     <PatientState>
       <AppointmentState>
     <div className="App">
@@ -25,6 +27,7 @@ function App() {
     </div>
     </AppointmentState>
     </PatientState>
+    </UserState>
   );
 }
 

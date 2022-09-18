@@ -11,12 +11,11 @@ const PatientState = (props) =>{
         Accept: "application/json",
         "Content-Type": "application/json",
         "Authorization":
-          "token 8446cca7ffcd2619d92976656a86c74c2c2e4d96",
+        `token ${localStorage.getItem('token')}`,
       },
     });
     const json = await response.json();
     setPatients(json);
-    console.log(json); 
     };
 
     return(

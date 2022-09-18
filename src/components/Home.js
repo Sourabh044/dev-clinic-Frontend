@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import LoginSignup from "./LoginSignup";
-
+import UserContext from "../context/User/userContext";
 const Home = () => {
+  const {login} = useContext(UserContext);
   return (
     <div>
-      <LoginSignup />
+      {!login && <LoginSignup />}
     </div>
   );
 };
