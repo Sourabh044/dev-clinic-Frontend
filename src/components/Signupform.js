@@ -1,29 +1,42 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import UserContext from "../context/User/userContext";
 import Ssvg from './images/signupform.svg'
+import Otp from "./Otp";
 const Signupform = () => {
-  const [credentials, setCredentials] = useState({semail:'', spassword: '', smobile:''})
-
+  const [credentials, setCredentials] = useState({semail:'', spassword: '', smobile:'', sname:''})
+  // const [verifyform, setVerifyform] = useState(false)
+  const {signup, verifyOtp} = useContext(UserContext);
   const onChange = (e) =>{
     setCredentials({...credentials, [e.target.name]: e.target.value})
   };
 
   const handleSignup = async (event) =>{
     event.preventDefault();
-    
+    signup(credentials);
+    // setVerifyform(true);
   }
-
-
   
   return (
-    <div className="d-flex flex-column flex-lg-row justify-content-between">
+      !verifyOtp?<div className="d-flex flex-column flex-lg-row justify-content-between">
       <img
         className="w-50 col"
         src={Ssvg}
         alt="Login illustraition here!"
       />
-          <div className="border"></div>
-      <form onSubmit={handleSignup} className="container text-start col">
+          <div className="border"></div> <form onSubmit={handleSignup} className="container text-start col">
         <div className=" mb-3">
+          <label htmlFor="sname" className="form-label">
+            Name
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="sname"
+            aria-describedby="emailHelp"
+            onChange={onChange}
+            name='sname'
+            value={credentials.sname}
+          />
           <label htmlFor="semail" className="form-label">
             Email address
           </label>
@@ -68,13 +81,14 @@ const Signupform = () => {
             className="form-control"
             id="spassword"
             value={credentials.spassword}
+            autoComplete="on"
           />
         </div>
         <div className="d-grid gap-2 d-md-flex justify-content-md-end">
          <button type="submit" className="btn btn-primary me-md-2">Signup</button>
         </div>
       </form>
-    </div>
+      </div>:<Otp/>
   );
 };
 

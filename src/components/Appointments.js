@@ -1,15 +1,18 @@
 import React, { useContext, useEffect } from 'react'
 import AppointmentContext from '../context/Appointments/appointmentContext'
-
+import UserContext from '../context/User/userContext';
+import { Navigate } from 'react-router-dom';
 const Appointments = () => {
-    const {appointments, getappointments } = useContext(AppointmentContext);
+    const {login} = useContext(UserContext)
+    const {appointments, getappointments ,acount} = useContext(AppointmentContext);
     useEffect(()=>{
         getappointments();
             // eslint-disable-next-line
     },[])
-      return (
+      return (!login?<Navigate to='/'/>:
     <div>
-      <h5 className='lead text-left'>Listing all Appointments.</h5>
+      <h5 className='lead mt-4'>Listing all Appointments.</h5>
+      <h5 className='lead'>{acount}</h5>
       <table className="table table-hover table-light container">
   <thead className='table-dark'>
     <tr>

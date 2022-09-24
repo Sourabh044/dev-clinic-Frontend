@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import UserContext from "../context/User/userContext";
 import Lsvg from "./images/loginform.svg";
 const LoginForm = () => {
-  const {login, auth} = useContext(UserContext);
+  const {auth} = useContext(UserContext);
   const [credentials, setCredentials] = useState({email:'', password:''});
   const onChange = (e) => {
     setCredentials({...credentials, [e.target.name]: e.target.value})
@@ -50,6 +50,7 @@ const LoginForm = () => {
             className="form-control"
             id="password"
             onChange={onChange}
+            autoComplete="on"
           />
         </div>
         <div className="d-grid gap-2 d-md-flex justify-content-md-end">

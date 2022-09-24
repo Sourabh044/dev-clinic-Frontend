@@ -1,16 +1,34 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PatientContext from '../context/Patients/patientContext';
+import AddPatient from './Addpatient';
+import UserContext from "../context/User/userContext";
+import  { useNavigate } from 'react-router-dom';
+
 
 const Patient = () => {
-  const {patients, getpatients} = useContext(PatientContext);;
+  const {patients, getpatients , pcount} = useContext(PatientContext);
+  const {login} = useContext(UserContext);
+  const Navigate = useNavigate();
+
+  const [modal, setModal] = useState(false);
   useEffect(()=>{
     getpatients();
     // eslint-disable-next-line
 },[])
 
-  return (
+  const openmodal = () =>{setModal(true)}
+  const closemodal = () =>{setModal(false)}
+
+  return (!login?Navigate('/'):
     <div className='animate__slideInUp'>
-      <h5 className='lead text-left'>Listing all Patients.</h5>
+      <h5 className='lead mt-4'>Listing all Patients.</h5>
+      <div>
+        <div className="lead">{pcount}</div>
+<button type="button" className="btn btn-primary my-2" onClick={openmodal} data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Add Patient
+</button>
+
+      </div>
       <table className="table table-hover table-light container">
   <thead className='table-dark'>
     <tr>
@@ -31,9 +49,9 @@ const Patient = () => {
       <td>{patient.phone}</td>
     </tr>)
     })}
-
   </tbody>
 </table>
+{modal && <AddPatient show={modal} close={closemodal} />}
     </div>
   )
 }
