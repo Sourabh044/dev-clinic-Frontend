@@ -22,8 +22,13 @@ const UserState = (props) => {
     });
     const json = await response.json();
     // console.log(Object.keys(json));
+    console.log(json)
     if (!json.token) {
       return alert("Enter Valid Credentials");
+    }
+    if(!json.is_verified){
+      alert('Please Verify Yourself')
+      navigate('verify')
     }
     // console.log(json.token.access);
     // console.log(json.is_verified);
@@ -105,14 +110,18 @@ const UserState = (props) => {
         refreshToken();
         otpverify(otp);
       }
-    } else if (json.status === false) {
+    } else if(json.info){
+      return alert(json.info)
+    }
+    else if (json.status === false) {
       return alert("invalid otp");
     } else if (json.status === true) {
       setIsVerified(true);
       setVerifyOtp(true);
+      setLogin(true);
       alert('Verifed Created User!')
-      window.location.reload(false);
-      navigate('/home')      // return console.log(Object.keys(json));
+      return navigate('/home')      
+      // window.location.reload(false);
     }
   };
   //  check if user is logged in or not

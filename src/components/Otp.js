@@ -16,10 +16,10 @@ const Otp = () => {
     }
 
   return (
-      <form onSubmit={handleotpclick} className="">
+      <form onSubmit={handleotpclick} className="mt-5">
         <div className="mb-3">
             <div className="d-flex justify-content-center">
-          <label htmlFor="otp" className="form-label">
+          <label htmlFor="otp" className="lead form-label">
             Otp: 
           </label>
           <input
@@ -32,7 +32,7 @@ const Otp = () => {
           />
           </div>
           <div id="otpHelp" className="form-text">
-            Check For OTP in your Email spam folder. Sometimes, it mght be there.
+            Check For OTP in your Email spam folder. Sometimes, it might be there.
           </div>
         </div>
         <button type="submit" className="btn btn-primary">

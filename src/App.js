@@ -10,12 +10,13 @@ import AppointmentState from './context/Appointments/appointmentState';
 import UserState from './context/User/userState';
 import Addpatient from './components/Addpatient';
 import { Navigate } from 'react-router-dom';
+import Otp from './components/Otp';
 // import NavbarTwo from './components/NavbarTwo';
 
 function App() {
   return (
   <UserState>
-    {/* // <NavbarTwo/> */}
+    {/*/ / <NavbarTwo/> */}
     <PatientState>
       <AppointmentState>
     <div className="App">
@@ -28,6 +29,7 @@ function App() {
         <Route path='appointments' element={<Appointments/>}></Route>
         <Route path='about-us' element={<About/>}></Route>
         <Route path='add-patient' element={<Addpatient/>}></Route>
+        <Route path='verify' element={<Otp/>}></Route>
         <Route path="*"element={<Navigate to="/" replace />}/>
       </Routes>
       </div>

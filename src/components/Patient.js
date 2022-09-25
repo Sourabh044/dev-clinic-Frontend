@@ -3,11 +3,12 @@ import PatientContext from '../context/Patients/patientContext';
 import AddPatient from './Addpatient';
 import UserContext from "../context/User/userContext";
 import  { useNavigate } from 'react-router-dom';
+// import Otp from "./Otp";
 
 
 const Patient = () => {
   const {patients, getpatients , pcount} = useContext(PatientContext);
-  const {login} = useContext(UserContext);
+  const {login, isVerfied} = useContext(UserContext);
   const Navigate = useNavigate();
 
   const [modal, setModal] = useState(false);
@@ -19,7 +20,15 @@ const Patient = () => {
   const openmodal = () =>{setModal(true)}
   const closemodal = () =>{setModal(false)}
 
-  return (!login?Navigate('/'):
+  if(!login){
+    return Navigate('/')
+  }
+  if(!isVerfied){
+    alert('You need to verify Your Account')
+    return Navigate('verify')
+  }
+
+  return (
     <div className='animate__slideInUp'>
       <h5 className='lead mt-4'>Listing all Patients.</h5>
       <div>
