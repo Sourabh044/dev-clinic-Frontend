@@ -22,7 +22,7 @@ const UserState = (props) => {
     });
     const json = await response.json();
     // console.log(Object.keys(json));
-    console.log(json)
+    // console.log(json)
     if (!json.token) {
       return alert("Enter Valid Credentials");
     }
@@ -52,7 +52,7 @@ const UserState = (props) => {
       body: JSON.stringify({ refresh: localStorage.getItem("refresh") }),
     });
     const json = await response.json();
-    console.log(json);
+    // console.log(json);
     localStorage.setItem("token", json.access);
   };
 
@@ -79,18 +79,22 @@ const UserState = (props) => {
     if (json.status === true) {
       localStorage.setItem("isVerified", json.is_verified);
       localStorage.setItem("token", json.token.access);
-      console.log(localStorage.getItem("token"));
+      // console.log(localStorage.getItem("token"));
       localStorage.setItem("refresh", json.token.refresh);
       setIsVerified(json.is_verified);
       setVerifyOtp(true);
+      // console.log(json);
+      return navigate('verify')
+
     }
 
-    console.log(json);
   };
   //  Logout a user
   const logout = () => {
     localStorage.removeItem("token");
     setLogin(false);
+    setIsVerified(false);
+    setVerifyOtp(false);
   };
   // Verifying the otp of the user
   const otpverify = async (otp) => {
@@ -104,7 +108,7 @@ const UserState = (props) => {
       body: JSON.stringify({ otp: otp }),
     });
     const json = await response.json();
-    console.log(json);
+    // console.log(json);
     if (json.error) {
       if (json.error.code === "token_not_valid") {
         refreshToken();

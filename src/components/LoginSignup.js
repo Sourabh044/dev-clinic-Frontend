@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import LoginForm from './LoginForm';
 import Signupform from './Signupform';
-
+import Spinner from './Spinner';
 const LoginSignup = () => {
-  return (
+  const [loading, setLoading] = useState(false);
+
+  return (loading?<Spinner/>:
     <div className="container my-2">
 <div className="justify-content-center">
 <div className="container ">
@@ -16,8 +18,8 @@ const LoginSignup = () => {
   </li>
 </ul>
 <div className="tab-content" id="pills-tabContent">
-  <div className="container tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabIndex="0"><LoginForm/></div>
-  <div className="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabIndex="0"><Signupform/></div>
+  <div className="container tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabIndex="0"><LoginForm setLoading={setLoading}/></div>
+  <div className="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabIndex="0"><Signupform setLoading={setLoading}/></div>
 </div>
 </div>
 </div>

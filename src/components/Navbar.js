@@ -4,7 +4,6 @@ import UserContext from '../context/User/userContext';
 const Navbar = () => {
   const {login, logout} = useContext(UserContext);
   const handleLogout = (e) =>{
-    e.preventDefault();
     localStorage.removeItem('token');
     <Navigate to='/home'/>
     logout();

@@ -1,23 +1,24 @@
 import React, { useContext, useState } from "react";
 import UserContext from "../context/User/userContext";
 import Ssvg from './images/signupform.svg'
-import Otp from "./Otp";
-const Signupform = () => {
+import Spinner from "./Spinner";
+const Signupform = (props) => {
   const [credentials, setCredentials] = useState({semail:'', spassword: '', smobile:'', sname:''})
-  // const [verifyform, setVerifyform] = useState(false)
-  const {signup, verifyOtp} = useContext(UserContext);
+  const {signup} = useContext(UserContext);
   const onChange = (e) =>{
     setCredentials({...credentials, [e.target.name]: e.target.value})
   };
+  const [loading, setLoading] = useState(false);
 
   const handleSignup = async (event) =>{
     event.preventDefault();
-    signup(credentials);
-    // setVerifyform(true);
+    setLoading(true);
+    await signup(credentials);
+    setLoading(false);
   }
   
-  return (
-      !verifyOtp?<div className="d-flex flex-column flex-lg-row justify-content-between">
+  return (loading?<Spinner text = 'Sending OTP to verify Email...'/>:
+      <div className="d-flex flex-column flex-lg-row justify-content-between">
       <img
         className="w-50 col"
         src={Ssvg}
@@ -88,7 +89,7 @@ const Signupform = () => {
          <button type="submit" className="btn btn-primary me-md-2">Signup</button>
         </div>
       </form>
-      </div>:<Otp/>
+      </div>
   );
 };
 

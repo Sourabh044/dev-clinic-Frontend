@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import UserContext from "../context/User/userContext";
 import Lsvg from "./images/loginform.svg";
-const LoginForm = () => {
+const LoginForm = (props) => {
   const {auth} = useContext(UserContext);
   const [credentials, setCredentials] = useState({email:'', password:''});
   const onChange = (e) => {
@@ -11,9 +11,10 @@ const LoginForm = () => {
   const handleLogin = async (event) => {
     event.preventDefault();
     // TODO 
+    props.setLoading(true)
     await auth(credentials);
-    console.log('logged in')
-
+    props.setLoading(false)
+    // console.log('logged in')
   };
   return (
     <div className="d-flex flex-column flex-lg-row justify-content-between">

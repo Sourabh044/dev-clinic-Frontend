@@ -1,21 +1,25 @@
 import React, { useContext, useState } from "react";
 import UserContext from "../context/User/userContext";
+import Spinner from "./Spinner";
 
-const Otp = () => {
+const Otp = (props) => {
 
     const [otp , setOtp] = useState({otp:''});
     const {otpverify} = useContext(UserContext)
+    const [loading, setLoading] = useState(false);
 
-    const handleotpclick = (e) => {
+    const handleotpclick = async (e) => {
         e.preventDefault();
-        otpverify(otp)
+        setLoading(true)
+        await otpverify(otp)
+        setLoading(false)
     }
 
     const onChange  = (e) =>{
         setOtp({...otp, [e.target.name]: e.target.value})
     }
 
-  return (
+  return (loading?<Spinner text='Please wait...'/>:
       <form onSubmit={handleotpclick} className="mt-5">
         <div className="mb-3">
             <div className="d-flex justify-content-center">
